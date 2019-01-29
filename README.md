@@ -22,7 +22,7 @@ The training of FaceQnet is done using the VGGFace2 database.
 
   Activate the environment:
 
-    source activate [env-name]
+    conda activate [env-name]
 
 2) Installing dependencies in your environment:
 
@@ -40,7 +40,7 @@ The training of FaceQnet is done using the VGGFace2 database.
   
  3) If you want to use a CUDA compatible GPU for faster predictions:
   
-   You will need CUDA installed in your computer: https://docs.nvidia.com/deeplearning/sdk/cudnn-install/
+   You will need CUDA and the Nvidia drivers installed in your computer: https://docs.nvidia.com/deeplearning/sdk/cudnn-install/
   
    Then, install the GPU version of Tensorflow:
     
@@ -48,7 +48,7 @@ The training of FaceQnet is done using the VGGFace2 database.
   
 -- Using FaceQnet for predicting scores:
 
-  1) Download or clone the repository 
+  1) Download or clone the repository. 
   2) Dowload the FaceQnet pretrained model (.h5 file) and place it in the /src folder.
   3) Edit and run the FaceQNet_obtainscores_Keras.py script.
 
