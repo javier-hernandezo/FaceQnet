@@ -51,7 +51,7 @@ def read_and_normalize_test_data():
 		
 
 #Loading the pretrained model
-model = load_model('VGG2-Quality_NET.h5')
+model = load_model('FaceQnet.h5')
 
 #See the details (layers) of FaceQnet
 # print(model.summary())
