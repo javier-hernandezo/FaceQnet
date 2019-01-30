@@ -49,7 +49,7 @@ The training of FaceQnet is done using the VGGFace2 database.
 -- Using FaceQnet for predicting scores:
 
   1) Download or clone the repository. 
-  2) Dowload the FaceQnet pretrained model (.h5 file) and place it in the /src folder.
+  2) Due to the size of the video example, please download the FaceQnet pretrained model <a href="https://github.com/javier2491/FaceQnet/releases/download/v1.0/VGG2-Quality_NET.h5" rel="nofollow">here</a> (.h5 file) and place it in the /src folder.
   3) Edit and run the FaceQNet_obtainscores_Keras.py script.
 
 
