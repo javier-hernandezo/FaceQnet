@@ -9,7 +9,7 @@ The training of FaceQnet is done using the VGGFace2 database.
 
 -- Configuring environment in Windows:
 
-1) Installing Conda: https://conda.io/docs/user-guide/install/windows.html
+1) Installing Conda: https://conda.io/projects/conda/en/latest/user-guide/install/index.html
 
   Update Conda in the default environment:
 
