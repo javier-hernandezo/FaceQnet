@@ -1,24 +1,9 @@
 # -*- coding: utf-8 -*-
-import keras as keras
-from keras.models import Model,Sequential,load_model
-import keras.layers as layers
-from keras.layers import Dense
-from keras.applications.resnet50 import ResNet50
-from keras.preprocessing import image
-from keras.applications.resnet50 import preprocess_input, decode_predictions
-from keras.preprocessing.image import ImageDataGenerator
-from keras.optimizers import SGD, Adadelta
-from keras.utils import plot_model
 
+from keras.models import load_model
 import numpy as np
-import glob
-import sys
-from PIL import Image
-from matplotlib import pyplot as plt
-from IPython.display import clear_output
 import os
 import cv2
-import pandas as pd
 
 
 batch_size = 1 #Numero de muestras para cada batch (grupo de entrada)
@@ -26,7 +11,7 @@ batch_size = 1 #Numero de muestras para cada batch (grupo de entrada)
 def load_test():
 	X_test = []
 	images_names = []
-	image_path = r".\\Samples\\"
+	image_path = r".\\Samples_cropped\\"
 	print('Read test images')
 	# for f in [f for f in os.listdir(image_path) if os.path.isdir(os.path.join(image_path, f))]:
 		# carpeta= os.path.join(image_path, f)
@@ -47,6 +32,7 @@ def load_test():
 def read_and_normalize_test_data():
     test_data, images_names = load_test()
     test_data = np.array(test_data, copy=False, dtype=np.float32)
+	
     return test_data, images_names
 		
 
@@ -58,9 +44,28 @@ model = load_model('FaceQnet.h5')
 
 #Loading the test data
 test_data, images_names = read_and_normalize_test_data()
+# if test_data.ndim == 4:
+	# axis = (1, 2, 3)
+	# size = test_data[0].size
+# elif test_data.ndim == 3:
+	# axis = (0, 1, 2)
+	# size = test_data.size
+# else:
+	# raise ValueError('Dimension should be 3 or 4')
+
+# mean = np.mean(test_data, axis=axis, keepdims=True)
+# std = np.std(test_data, axis=axis, keepdims=True)
+# std_adj = np.maximum(std, 1.0/np.sqrt(size))
+# y = (test_data - mean) / std_adj
+
+y=test_data
 
 #Extract quality scores for the samples
-predictions = model.predict(test_data, batch_size=batch_size, verbose=1)
+m=0.7
+s=0.5
+score = model.predict(y, batch_size=batch_size, verbose=1)
+score = 0.5*np.tanh(((score-m)/s) + 1)
+predictions = -score + 1; #Convertimos el score de distancia en similitud
 
 #Guardamos los scores para cada clase en la prediccion de scores
 fichero_scores = open('scores_quality.txt','w')
