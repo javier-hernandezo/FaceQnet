@@ -1,7 +1,7 @@
 # FaceQnet
 FaceQnet: Quality Assessment for Face Recognition based on Deep Learning
 
-This repository contains the DNN FaceQnet presented in the paper: "FaceQnet: Quality Assessment for Face Recognition based on Deep Learning".
+This repository contains the DNN FaceQnet presented in the paper: <a href="https://arxiv.org/abs/1904.01740" rel="nofollow">"FaceQnet: Quality Assessment for Face Recognition based on Deep Learning"</a>.
 
 FaceQnet is a No-Reference, end-to-end Quality Assessment (QA) system for face recognition based on deep learning. 
 The system consists of a Convolutional Neural Network that is able to predict the suitability of a specific input image for face recognition purposes. 
