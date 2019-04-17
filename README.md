@@ -49,7 +49,7 @@ The training of FaceQnet is done using the VGGFace2 database.
 -- Using FaceQnet for predicting scores:
 
   1) Download or clone the repository. 
-  2) Due to the size of the video example, please download the FaceQnet pretrained model <a href="https://github.com/javier2491/FaceQnet/releases/download/v1.0/FaceQnet.h5" rel="nofollow">here</a> (.h5 file) and place it in the /src folder.
+  2) Due to the size of the video example, please download the FaceQnet pretrained model <a href="https://github.com/uam-biometrics/FaceQnet/releases/download/v1.1/FaceQnet.h5" rel="nofollow">here</a> (.h5 file) and place it in the /src folder.
   3) Edit and run the FaceQNet_obtainscores_Keras.py script.
      - You will need to change the folder from which the script will try to charge the face images. It is src/Samples_cropped by default. 
      - The best results will be obtained when the input images have been cropped just to the zone of the detected face. In our experiments we have used the MTCNN face detector from <a href="https://kpzhang93.github.io/MTCNN_face_detection_alignment/index.html" rel="nofollow">here</a>, but other detector can be used.
