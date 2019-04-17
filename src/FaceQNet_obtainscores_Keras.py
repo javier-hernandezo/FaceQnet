@@ -24,6 +24,7 @@ def load_test():
 			
 	for imagen in [imagen for imagen in os.listdir(image_path) if os.path.isfile(os.path.join(image_path, imagen))]:
 		imagenes = os.path.join(image_path, imagen)
+		print(imagenes)
 		img = cv2.resize(cv2.imread(imagenes, cv2.IMREAD_COLOR), (224, 224))
 		X_test.append(img)
 		images_names.append(imagenes)
@@ -64,9 +65,9 @@ y=test_data
 m=0.7
 s=0.5
 score = model.predict(y, batch_size=batch_size, verbose=1)
-score = 0.5*np.tanh(((score-m)/s) + 1)
-predictions = -score + 1; #Convertimos el score de distancia en similitud
-
+#score = 0.5*np.tanh(((score-m)/s) + 1)
+#predictions = -score + 1; #Convertimos el score de distancia en similitud
+predictions = score
 #Guardamos los scores para cada clase en la prediccion de scores
 fichero_scores = open('scores_quality.txt','w')
 i=0
