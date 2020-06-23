@@ -54,12 +54,12 @@ The training of FaceQnet is done using the VGGFace2 database.
 -- Using FaceQnet for predicting scores:
 
   1) Download or clone the repository. 
-  2) Due to the size of the video example, please download one of the the FaceQnet pretrained models and place the downloaded .h5 file it in the /src folder.:  
+  2) Due to the size of the video example, please download one of the the FaceQnet pretrained models and place the downloaded .h5 file it in the /src folder:  
   
-  <a href="https://github.com/uam-biometrics/FaceQnet/releases/download/v0/FaceQnet.h5" rel="nofollow">FaceQnet v0</a> 
+  - <a href="https://github.com/uam-biometrics/FaceQnet/releases/download/v0/FaceQnet.h5" rel="nofollow">FaceQnet v0 pretrained model</a> 
   
   
-  <a href="https://github.com/uam-biometrics/FaceQnet/releases/download/v1.0/FaceQnet_v1.h5" rel="nofollow">FaceQnet v1</a> 
+  - <a href="https://github.com/uam-biometrics/FaceQnet/releases/download/v1.0/FaceQnet_v1.h5" rel="nofollow">FaceQnet v1 pretrained model</a> 
   
   
   3) Edit and run the FaceQNet_obtainscores_Keras.py script.
