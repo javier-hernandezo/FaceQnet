@@ -6,60 +6,41 @@ import os
 import cv2
 
 
-batch_size = 1 #Numero de muestras para cada batch (grupo de entrada)
+batch_size = 1 #Number of samples for each batch (input group)
+images_dir = r"./Samples_cropped/"
 
-def load_test():
+def load_test_data():
 	X_test = []
 	images_names = []
-	image_path = r".\\Samples_cropped\\"
-	print('Read test images')
-	
-	for imagen in [imagen for imagen in os.listdir(image_path) if os.path.isfile(os.path.join(image_path, imagen))]:
-		imagenes = os.path.join(image_path, imagen)
-		print(imagenes)
-		img = cv2.resize(cv2.imread(imagenes, cv2.IMREAD_COLOR), (224, 224))
-		X_test.append(img)
-		images_names.append(imagenes)
+	print('Reading images: ')
+	for image_name in os.listdir(images_dir):
+		image_path = os.path.join(images_dir, image_name)
+		if image_path.lower().endswith(('.bmp', '.dib', '.png', '.jpg', '.jpeg', '.pbm', '.pgm', '.ppm', '.tif', '.tiff')):
+			print(image_path)
+			image = cv2.resize(cv2.imread(image_path, cv2.IMREAD_COLOR), (224, 224))
+			X_test.append(image)
+			images_names.append(image_path)
 	return X_test, images_names
 
 def read_and_normalize_test_data():
-    test_data, images_names = load_test()
-    test_data = np.array(test_data, copy=False, dtype=np.float32)
-    return test_data, images_names
-		
+    X_test, images_names = load_test_data()
+    X_test = np.array(X_test, copy=False, dtype=np.float32)
+    return X_test, images_names
 
 #Loading one of the the pretrained models
-
 # model = load_model('FaceQnet.h5')
-
 model = load_model('FaceQnet_v1.h5')
 
 #See the details (layers) of FaceQnet
 # print(model.summary())
 
-#Loading the test data
-test_data, images_names = read_and_normalize_test_data()
-y=test_data
+#Loading the test images
+X_test, images_names = read_and_normalize_test_data()
 
-#Extract quality scores for the samples
-score = model.predict(y, batch_size=batch_size, verbose=1)
-predictions = score ;
+#Calculate quality scores for test images
+scores = model.predict(X_test, batch_size=batch_size, verbose=1)
 
-
-#Saving the quality measures for the test images
-fichero_scores = open('scores_quality.txt','w')
-i=0
-
-
-#Saving the scores in a file
-fichero_scores.write("img;score\n")
-for item in predictions:
-	fichero_scores.write("%s" % images_names[i])
-	#Constraining the output scores to the 0-1 range
-	#0 means worst quality, 1 means best quality
-	if float(predictions[i])<0:
-		predictions[i]='0'
-	elif float(predictions[i])>1:
-		predictions[i]='1'
-	fichero_scores.write(";%s\n" % predictions[i])
-	i=i+1
+image_score_dict = dict(zip(images_names, scores))
+image_score_list = sorted(image_score_dict.items(), key=lambda x: x[1], reverse=True)
+image_score_array = np.array(image_score_list)
+np.savetxt(images_dir + "face_quality_scores.csv", image_score_array, fmt='%s', delimiter=',')
